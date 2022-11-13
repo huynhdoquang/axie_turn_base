@@ -11,6 +11,9 @@ namespace Net.HungryBug.Atb.Game
         private List<ScriptableUnit> _units;
         public BaseHero SelectedHero;
 
+        public List<Tile> heroesTiles;
+        public List<Tile> enemiesTiles;
+
         public void SpawnHeroes()
         {
             var heroCount = 1;

@@ -1,21 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public abstract class Tile : MonoBehaviour {
     public string TileName;
     [SerializeField] protected SpriteRenderer _renderer;
+    [SerializeField] protected Sprite _spriteBase;
+    [SerializeField] protected Sprite _spriteIso;
     [SerializeField] private GameObject _highlight;
     [SerializeField] private bool _isWalkable;
 
     public BaseUnit OccupiedUnit;
     public bool Walkable => _isWalkable && OccupiedUnit == null;
 
+    public Vector2 Offet = Vector2.zero;
+
 
     public virtual void Init(int x, int y)
     {
-      
+        Offet = new Vector2(x, y);
     }
+
 
     void OnMouseEnter()
     {
@@ -56,5 +62,20 @@ public abstract class Tile : MonoBehaviour {
         unit.transform.position = transform.position;
         OccupiedUnit = unit;
         unit.OccupiedTile = this;
+    }
+
+    public void SetUnitIso(BaseUnit unit)
+    {
+        if (unit.OccupiedTileIso != null) unit.OccupiedTile.OccupiedUnit = null;
+        //unit.transform.position = transform.position;
+        OccupiedUnit = unit;
+        unit.OccupiedTileIso = this;
+    }
+
+
+    private void OnDrawGizmos()
+    {
+        Handles.color = Color.blue;
+        Handles.Label(this.transform.position, $"{this.Offet.x}, {this.Offet.y}");
     }
 }

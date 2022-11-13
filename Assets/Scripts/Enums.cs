@@ -8,3 +8,11 @@ public enum EnTileType
     Atk = 1,
     Def = 2,
 }
+
+
+public enum EnMapCrd
+{
+    Base = 0,
+    Iso = 1,
+}
+

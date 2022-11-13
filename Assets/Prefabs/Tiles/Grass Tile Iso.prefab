@@ -21,6 +21,35 @@ MonoBehaviour:
   OccupiedUnit: {fileID: 0}
   _baseColor: {r: 0.4392157, g: 0.7411765, b: 0.36862746, a: 1}
   _offsetColor: {r: 0.4, g: 0.6901961, b: 0.33333334, a: 1}
+--- !u!60 &7589567772531656230
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 838513813503424364}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 0.5}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0, y: 0.25}
+      - {x: -0.5, y: 0}
+      - {x: 0, y: -0.25}
+      - {x: 0.5, y: 0}
 --- !u!1001 &3275597865028579855
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30,18 +59,85 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 154795547079012867, guid: 389a40555769ebb4b9a76dbb6f2248b5,
         type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 3625043607559282579, guid: 0d267bc78a0864eb48358689b29ed20a,
+        type: 3}
+    - target: {fileID: 154795547079012867, guid: 389a40555769ebb4b9a76dbb6f2248b5,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 154795547079012867, guid: 389a40555769ebb4b9a76dbb6f2248b5,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 154795547079012867, guid: 389a40555769ebb4b9a76dbb6f2248b5,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 154795547079012867, guid: 389a40555769ebb4b9a76dbb6f2248b5,
+        type: 3}
       propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2798913748850394467, guid: 389a40555769ebb4b9a76dbb6f2248b5,
         type: 3}
       propertyPath: m_Name
-      value: Grass Tile
+      value: Grass Tile Iso
+      objectReference: {fileID: 0}
+    - target: {fileID: 5279743023782197531, guid: 389a40555769ebb4b9a76dbb6f2248b5,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5780509605220793829, guid: 389a40555769ebb4b9a76dbb6f2248b5,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 3625043607559282579, guid: 045b15ec09bba42448d89db77fa6f20a,
+        type: 3}
+    - target: {fileID: 5780509605220793829, guid: 389a40555769ebb4b9a76dbb6f2248b5,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5780509605220793829, guid: 389a40555769ebb4b9a76dbb6f2248b5,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5780509605220793829, guid: 389a40555769ebb4b9a76dbb6f2248b5,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6663364570048627825, guid: 389a40555769ebb4b9a76dbb6f2248b5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6861981929107700963, guid: 389a40555769ebb4b9a76dbb6f2248b5,
         type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6861981929107700963, guid: 389a40555769ebb4b9a76dbb6f2248b5,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6861981929107700963, guid: 389a40555769ebb4b9a76dbb6f2248b5,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6861981929107700963, guid: 389a40555769ebb4b9a76dbb6f2248b5,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6861981929107700963, guid: 389a40555769ebb4b9a76dbb6f2248b5,
         type: 3}
@@ -93,7 +189,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5279743023782197531, guid: 389a40555769ebb4b9a76dbb6f2248b5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 389a40555769ebb4b9a76dbb6f2248b5, type: 3}
 --- !u!1 &838513813503424364 stripped
 GameObject:

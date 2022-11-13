@@ -11,7 +11,10 @@ public class UnitManager : MonoBehaviour {
     public BaseHero SelectedHero;
 
 
-    public static MapReader mapSpawner;
+    public MapReader mapSpawner;
+
+    public List<BaseUnit> heroLst;
+    public List<BaseUnit> enemyLst;
 
     void Awake() {
         Instance = this;
@@ -35,6 +38,7 @@ public class UnitManager : MonoBehaviour {
         //new one
         var prefab = GetRandomUnit<BaseHero>(Faction.Hero);
         var lst = GridManager.Instance.GetSpawnTiles(EnTileType.Atk);
+        var lst_iso = GridManager.Instance.GetSpawnTilesIso(EnTileType.Atk);
 
         Debug.Log("list here: " + lst.Count);
         for (int i = 0; i < lst.Count; i++)
@@ -44,6 +48,9 @@ public class UnitManager : MonoBehaviour {
             var randomSpawnTile = lst[i];
 
             randomSpawnTile.SetUnit(spawnedHero);
+            lst_iso[i].SetUnitIso(spawnedHero);
+
+            heroLst.Add(spawnedHero);
         }
 
         GameManager.Instance.ChangeState(GameState.SpawnEnemies);
@@ -66,6 +73,8 @@ public class UnitManager : MonoBehaviour {
         //new one
         var prefab = GetRandomUnit<BaseEnemy>(Faction.Enemy);
         var lst = GridManager.Instance.GetSpawnTiles(EnTileType.Def);
+        var lst_iso = GridManager.Instance.GetSpawnTilesIso(EnTileType.Def);
+
         for (int i = 0; i < lst.Count; i++)
         {
 
@@ -73,6 +82,9 @@ public class UnitManager : MonoBehaviour {
             var randomSpawnTile = lst[i];
 
             randomSpawnTile.SetUnit(spawnedHero);
+            lst_iso[i].SetUnitIso(spawnedHero);
+
+            enemyLst.Add(spawnedHero);
         }
 
         GameManager.Instance.ChangeState(GameState.HeroesTurn);

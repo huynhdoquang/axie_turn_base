@@ -40,6 +40,23 @@ public class GameManager : MonoBehaviour
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
         }
     }
+
+    EnMapCrd enMapCod = EnMapCrd.Base;
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            if (enMapCod == EnMapCrd.Base)
+            {
+                enMapCod = EnMapCrd.Iso;
+            }
+            else if (enMapCod == EnMapCrd.Iso)
+            {
+                enMapCod = EnMapCrd.Base;
+            }
+            GridManager.Instance.SwitchCrd(enMapCod);
+        }
+    }
 }
 
 public enum GameState
