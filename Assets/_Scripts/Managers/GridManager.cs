@@ -13,7 +13,10 @@ public class GridManager : MonoBehaviour {
 
     [SerializeField] private Transform _cam;
 
+    [SerializeField] private MapReader mapReader;
+
     private Dictionary<Vector2, Tile> _tiles;
+
 
     void Awake() {
         Instance = this;
@@ -21,11 +24,14 @@ public class GridManager : MonoBehaviour {
 
     public void GenerateGrid()
     {
+
+        mapReader.Init();
+
         _tiles = new Dictionary<Vector2, Tile>();
         for (int x = 0; x < _width; x++)
         {
             for (int y = 0; y < _height; y++) {
-                var randomTile = Random.Range(0, 6) == 3 ? _mountainTile : _grassTile;
+                var randomTile = /*Random.Range(0, 6) == 3 ? _mountainTile :*/ _grassTile;
                 var spawnedTile = Instantiate(randomTile, new Vector3(x, y), Quaternion.identity);
                 spawnedTile.name = $"Tile {x} {y}";
 
@@ -56,4 +62,23 @@ public class GridManager : MonoBehaviour {
         if (_tiles.TryGetValue(pos, out var tile)) return tile;
         return null;
     }
+
+    public List<Tile> GetSpawnTiles(EnTileType enTileType)
+    {
+        var tiles = new List<Tile>();
+        for (int r = 0; r < mapReader.MapData.GetLength(0); r++)
+        {
+            for (int c = 0; c < mapReader.MapData.GetLength(1); c++)
+            {
+                var e = (EnTileType)(mapReader.MapData[r, c]);
+                
+                if (e == enTileType) //ally
+                {
+                    tiles.Add(_tiles[new Vector2(r, c)]);
+                }
+            }
+        }
+        return tiles;
+    }
+
 }

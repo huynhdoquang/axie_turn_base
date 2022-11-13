@@ -1,0 +1,12 @@
+Base	Base	Base	Base	Base	Base	Base	Base	Base	Base	Base	Base
+Base	Base	Base	Base	Atk	Atk	Atk	Atk	Base	Base	Base	Base
+Base	Base	Base	Base	Atk	Atk	Atk	Atk	Base	Base	Base	Base
+Base	Base	Base	Base	Base	Base	Base	Base	Base	Base	Base	Base
+Base	Atk	Atk	Base	Def	Def	Def	Def	Base	Atk	Atk	Base
+Base	Atk	Atk	Base	Def	Def	Def	Def	Base	Atk	Atk	Base
+Base	Atk	Atk	Base	Def	Def	Def	Def	Base	Atk	Atk	Base
+Base	Atk	Atk	Base	Def	Def	Def	Def	Base	Atk	Atk	Base
+Base	Base	Base	Base	Base	Base	Base	Base	Base	Base	Base	Base
+Base	Base	Base	Base	Atk	Atk	Atk	Atk	Base	Base	Base	Base
+Base	Base	Base	Base	Atk	Atk	Atk	Atk	Base	Base	Base	Base
+Base	Base	Base	Base	Base	Base	Base	Base	Base	Base	Base	Base

@@ -5,6 +5,6 @@ using UnityEngine;
 public enum EnTileType
 {
     Base = 0,
-    Ally = 1,
-    Enemy = 2,
+    Atk = 1,
+    Def = 2,
 }

@@ -7,7 +7,7 @@ namespace Net.HungryBug.Atb.Game
 {
     public class GameManager : MonoBehaviour
     {
-        private MapSpawner mapSpawner;
+        private MapReader mapSpawner;
         private List<ScriptableUnit> _units;
         public BaseHero SelectedHero;
 

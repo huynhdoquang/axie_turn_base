@@ -10,6 +10,9 @@ public class UnitManager : MonoBehaviour {
     private List<ScriptableUnit> _units;
     public BaseHero SelectedHero;
 
+
+    public static MapReader mapSpawner;
+
     void Awake() {
         Instance = this;
 
@@ -18,12 +21,27 @@ public class UnitManager : MonoBehaviour {
     }
 
     public void SpawnHeroes() {
-        var heroCount = 1;
+        /*var heroCount = 2;
 
         for (int i = 0; i < heroCount; i++) {
             var randomPrefab = GetRandomUnit<BaseHero>(Faction.Hero);
             var spawnedHero = Instantiate(randomPrefab);
             var randomSpawnTile = GridManager.Instance.GetHeroSpawnTile();
+
+            randomSpawnTile.SetUnit(spawnedHero);
+        }*/
+
+
+        //new one
+        var prefab = GetRandomUnit<BaseHero>(Faction.Hero);
+        var lst = GridManager.Instance.GetSpawnTiles(EnTileType.Atk);
+
+        Debug.Log("list here: " + lst.Count);
+        for (int i = 0; i < lst.Count; i++)
+        {
+           
+            var spawnedHero = Instantiate(prefab);
+            var randomSpawnTile = lst[i];
 
             randomSpawnTile.SetUnit(spawnedHero);
         }
@@ -33,7 +51,7 @@ public class UnitManager : MonoBehaviour {
 
     public void SpawnEnemies()
     {
-        var enemyCount = 1;
+        /*var enemyCount = 3;
 
         for (int i = 0; i < enemyCount; i++)
         {
@@ -42,6 +60,19 @@ public class UnitManager : MonoBehaviour {
             var randomSpawnTile = GridManager.Instance.GetEnemySpawnTile();
 
             randomSpawnTile.SetUnit(spawnedEnemy);
+        }*/
+
+
+        //new one
+        var prefab = GetRandomUnit<BaseEnemy>(Faction.Enemy);
+        var lst = GridManager.Instance.GetSpawnTiles(EnTileType.Def);
+        for (int i = 0; i < lst.Count; i++)
+        {
+
+            var spawnedHero = Instantiate(prefab);
+            var randomSpawnTile = lst[i];
+
+            randomSpawnTile.SetUnit(spawnedHero);
         }
 
         GameManager.Instance.ChangeState(GameState.HeroesTurn);
@@ -55,4 +86,5 @@ public class UnitManager : MonoBehaviour {
         SelectedHero = hero;
         MenuManager.Instance.ShowSelectedHero(hero);
     }
+
 }
