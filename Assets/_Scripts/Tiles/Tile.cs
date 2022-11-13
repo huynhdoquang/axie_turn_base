@@ -22,6 +22,10 @@ public abstract class Tile : MonoBehaviour {
         Offet = new Vector2(x, y);
     }
 
+    public void ResetHighLight()
+    {
+        _highlight.SetActive(false);
+    }
 
     void OnMouseEnter()
     {

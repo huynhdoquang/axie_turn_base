@@ -104,6 +104,17 @@ public class GridManager : MonoBehaviour {
                 break;
         }
 
+        //reset highlight visual
+        foreach (var item in _tiles)
+        {
+            item.Value.ResetHighLight();
+        }
+
+        foreach (var item in _tilesIso)
+        {
+            item.Value.ResetHighLight();
+        }
+
         //todo: recheck entity pos
         foreach (var item in UnitManager.Instance.heroLst)
         {
