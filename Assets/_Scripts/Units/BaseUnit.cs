@@ -5,7 +5,6 @@ using UnityEngine;
 public class BaseUnit : MonoBehaviour {
     public string UnitName;
     public Tile OccupiedTile;
-    public Tile OccupiedTileIso;
     public Faction Faction;
 
     private EnMapCrd curCrd;
@@ -15,21 +14,10 @@ public class BaseUnit : MonoBehaviour {
         var localX = 0f;
         var localY = 0f;
 
-        Vector2 offet = Vector2.zero;
-        switch (enMapCrd)
-        {
-            case EnMapCrd.Base:
-                offet = OccupiedTile.Offet;
-                break;
-            case EnMapCrd.Iso:
-                offet = OccupiedTileIso.Offet;
-                break;
-            default:
-                break;
-        }
-
-        var x = offet.x;
-        var y = offet.y;
+        Vector2 offset = OccupiedTile.Offset;
+       
+        var x = offset.x;
+        var y = offset.y;
 
         switch (enMapCrd)
         {

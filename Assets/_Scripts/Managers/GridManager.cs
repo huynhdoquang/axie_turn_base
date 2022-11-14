@@ -33,7 +33,6 @@ public class GridManager : MonoBehaviour {
 
     public void GenerateGrid()
     {
-
         mapReader.Init();
 
         //base
@@ -82,8 +81,6 @@ public class GridManager : MonoBehaviour {
         _cam.transform.position = new Vector3((float)_width / 2 - 0.5f, -(float)_height / 2 - 0.5f + 1, -10);
 
         GameManager.Instance.ChangeState(GameState.SpawnHeroes);
-
-        
     }
 
     public void SwitchCrd(EnMapCrd enMapCrd)
@@ -119,12 +116,33 @@ public class GridManager : MonoBehaviour {
         foreach (var item in UnitManager.Instance.heroLst)
         {
             item.SwicthCrd(enMapCrd);
+
+            var tile = GetOccupiedTile(item.OccupiedTile.Offset, enMapCrd);
+            tile.SetUnit(item);
         }
 
         foreach (var item in UnitManager.Instance.enemyLst)
         {
             item.SwicthCrd(enMapCrd);
+
+            var tile = GetOccupiedTile(item.OccupiedTile.Offset, enMapCrd);
+            tile.SetUnit(item);
         }
+    }
+
+    public Tile GetOccupiedTile(Vector2 offset, EnMapCrd enMapCrd)
+    {
+        switch (enMapCrd)
+        {
+            case EnMapCrd.Base:
+                return _tiles[offset];
+            case EnMapCrd.Iso:
+                return _tilesIso[offset];
+            default:
+                break;
+        }
+
+        return null;
     }
 
     public Tile GetHeroSpawnTile() {

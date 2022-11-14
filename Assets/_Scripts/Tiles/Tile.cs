@@ -14,12 +14,12 @@ public abstract class Tile : MonoBehaviour {
     public BaseUnit OccupiedUnit;
     public bool Walkable => _isWalkable && OccupiedUnit == null;
 
-    public Vector2 Offet = Vector2.zero;
+    public Vector2 Offset = Vector2.zero;
 
 
     public virtual void Init(int x, int y)
     {
-        Offet = new Vector2(x, y);
+        Offset = new Vector2(x, y);
     }
 
     public void ResetHighLight()
@@ -68,18 +68,9 @@ public abstract class Tile : MonoBehaviour {
         unit.OccupiedTile = this;
     }
 
-    public void SetUnitIso(BaseUnit unit)
-    {
-        if (unit.OccupiedTileIso != null) unit.OccupiedTile.OccupiedUnit = null;
-        //unit.transform.position = transform.position;
-        OccupiedUnit = unit;
-        unit.OccupiedTileIso = this;
-    }
-
-
     private void OnDrawGizmos()
     {
         Handles.color = Color.blue;
-        Handles.Label(this.transform.position, $"{this.Offet.x}, {this.Offet.y}");
+        Handles.Label(this.transform.position, $"{this.Offset.x}, {this.Offset.y}");
     }
 }

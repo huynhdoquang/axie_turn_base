@@ -48,7 +48,6 @@ public class UnitManager : MonoBehaviour {
             var randomSpawnTile = lst[i];
 
             randomSpawnTile.SetUnit(spawnedHero);
-            lst_iso[i].SetUnitIso(spawnedHero);
 
             heroLst.Add(spawnedHero);
         }
@@ -82,7 +81,6 @@ public class UnitManager : MonoBehaviour {
             var randomSpawnTile = lst[i];
 
             randomSpawnTile.SetUnit(spawnedHero);
-            lst_iso[i].SetUnitIso(spawnedHero);
 
             enemyLst.Add(spawnedHero);
         }
