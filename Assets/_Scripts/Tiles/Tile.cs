@@ -126,7 +126,7 @@ public abstract class Tile : MonoBehaviour {
                         var atkMagicNumber = selectedHero.magicNumber;
                         //do atk
                         enemy.TakeDmg(atkMagicNumber);
-                        UnitManager.Instance.SetSelectedHero(null);
+                        UnitManager.Instance.SetSelectedHero(null, isEndAction: true);
                     }
                 }
             }
@@ -140,7 +140,7 @@ public abstract class Tile : MonoBehaviour {
                 if (moveAbleTiles != null && moveAbleTiles.Contains(context))
                 {
                     SetUnit(UnitManager.Instance.SelectedHero);
-                    UnitManager.Instance.SetSelectedHero(null);
+                    UnitManager.Instance.SetSelectedHero(null, isEndAction: true);
                 }
             }
         }

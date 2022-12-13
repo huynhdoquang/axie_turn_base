@@ -223,6 +223,8 @@ public class GridManager : MonoBehaviour {
 
     private List<TileContext> CheckAvaiableMove(BaseUnit baseUnit)
     {
+        var returnLst = new List<TileContext>();
+
         var isMoveAble = IsMoveAble(baseUnit);
         if (isMoveAble)
         {
@@ -273,7 +275,7 @@ public class GridManager : MonoBehaviour {
                     }
                 }
 
-                var returnLst = new List<TileContext>();
+                
                 foreach (var item in lst_moveAble)
                 {
                     switch (item)
@@ -310,19 +312,9 @@ public class GridManager : MonoBehaviour {
                             break;
                     }
                 }
-                return returnLst;
-            }
-            else
-            {
-                //enemy can not move
-                return null;
             }
         }
-        else
-        {
-            //null
-            return null;
-        }
+        return returnLst;
     }
 
     public CharTurnData CheckTurnData(BaseUnit baseUnit)

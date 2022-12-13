@@ -74,7 +74,7 @@ public class UnitManager : MonoBehaviour {
 
     private List<TileContext> indicatorTile = new List<TileContext>();
     public CharTurnData CurrentTurnData;
-    public void SetSelectedHero(BaseHero hero) {
+    public void SetSelectedHero(BaseHero hero, bool isEndAction = false) {
 
         if(SelectedHero != null) SelectedHero.SetSelected(false);
         SelectedHero = hero;
@@ -88,10 +88,27 @@ public class UnitManager : MonoBehaviour {
         {
             item.ResetState();
         }
+
         indicatorTile = new List<TileContext>();
 
         if (hero == null)
         {
+            if (isEndAction)
+            {
+                //check turn
+                foreach (var item in this.heroLst)
+                {
+                    var turnData = GridManager.Instance.CheckTurnData(item);
+                    if (turnData.AtkUnitAvaiables.Count != 0
+                        || turnData.MoveTileAvaiables.Count != 0)
+                    {
+                        return;
+                    }
+                }
+
+                //not any move able
+                MenuManager.Instance.ShowPanelInfo("DONT HAVE ANY MOVE ABLE.");
+            }
             return;
         }
 

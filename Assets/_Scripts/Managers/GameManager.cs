@@ -85,6 +85,8 @@ public class GameManager : MonoBehaviour
         {
             Destroy(item.gameObject);
         }
+
+        GridManager.Instance.SwitchCrd(EnMapCrd.Base);
         //
         ChangeState(GameState.SpawnHeroes);
     }
