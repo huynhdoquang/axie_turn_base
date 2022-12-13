@@ -104,8 +104,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void Restart()
+    public void Restart(bool isLoadMapFromFile = false)
     {
+        if (isLoadMapFromFile)
+        {
+            GridManager.Instance.ReGenMap();
+        }
+
         //clear map
         foreach (var item in UnitManager.Instance.heroLst)
         {

@@ -185,9 +185,12 @@ public abstract class Tile : MonoBehaviour {
     }
     #endregion
 
+#if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         Handles.color = Color.blue;
         Handles.Label(this.transform.position, $"{this.Offset.x}, {this.Offset.y}");
     }
+#endif
+
 }

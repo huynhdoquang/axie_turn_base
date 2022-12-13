@@ -181,7 +181,7 @@ public class UnitManager : MonoBehaviour {
             if (enemyLst.Count == 0)
             {
                 //win
-                MenuManager.Instance.ShowPanelInfo("<< WIN >>>");
+                MenuManager.Instance.ShowPanelInfo("<<< WIN >>>");
             }
         }
     }

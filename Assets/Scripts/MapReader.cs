@@ -19,6 +19,11 @@ public class MapTable : TextTable<MapRecord>
     {
         this.Load(true);
     }
+
+    public MapTable(string txt) : base(LoadType.FromString, txt, columns: 12, 0, containsHeader: false)
+    {
+        this.Load(true);
+    }
 }
 
 public class MapReader : MonoBehaviour
@@ -38,6 +43,11 @@ public class MapReader : MonoBehaviour
             mapTable.Load();
         }
 
+        ParseMap();
+    }
+
+    void ParseMap()
+    {
         for (int r = 0; r < mapTable.Rows.Length; r++)
         {
             for (int c = 0; c < mapTable.ColumnsCount; c++)
@@ -46,7 +56,7 @@ public class MapReader : MonoBehaviour
                 MapData[r, c] = ConverMapData(mapTable.Rows[r].Columns[c]);
             }
         }
-        
+
         int ConverMapData(string input)
         {
             var e = EnTileType.Base;
@@ -58,6 +68,18 @@ public class MapReader : MonoBehaviour
 
             return (int)e;
         }
+    }
+
+    public void ReadFromFile()
+    {
+        var str = PlayerPrefs.GetString("LEVEL");
+        if (str != null)
+        {
+            mapTable = new MapTable(str);
+            mapTable.Load();
+        }
+
+        ParseMap();
     }
 }
 

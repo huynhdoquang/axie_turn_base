@@ -178,9 +178,9 @@ public class GridManager : MonoBehaviour {
             {
                 var e = (EnTileType)(mapReader.MapData[r, c]);
 
-                if (e == enTileType) //ally
+                if (e == enTileType)
                 {
-                    tiles.Add(TileContexts[new Vector2(r, c)]);
+                    tiles.Add(TileContexts[new Vector2(c, r)]);
                 }
             }
         }
@@ -365,8 +365,9 @@ public class GridManager : MonoBehaviour {
 
         return charTurnData;
     }
-    public void MoveUnit()
-    {
 
+    public void ReGenMap()
+    {
+        mapReader.ReadFromFile();
     }
 }
