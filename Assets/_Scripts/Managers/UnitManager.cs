@@ -24,17 +24,6 @@ public class UnitManager : MonoBehaviour {
     }
 
     public void SpawnHeroes() {
-        /*var heroCount = 2;
-
-        for (int i = 0; i < heroCount; i++) {
-            var randomPrefab = GetRandomUnit<BaseHero>(Faction.Hero);
-            var spawnedHero = Instantiate(randomPrefab);
-            var randomSpawnTile = GridManager.Instance.GetHeroSpawnTile();
-
-            randomSpawnTile.SetUnit(spawnedHero);
-        }*/
-
-
         //new one
         var prefab = GetRandomUnit<BaseHero>(Faction.Hero);
         var lst = GridManager.Instance.GetSpawnTiles(EnTileType.Atk);
@@ -47,6 +36,7 @@ public class UnitManager : MonoBehaviour {
             var spawnedHero = Instantiate(prefab);
             var randomSpawnTile = lst[i];
 
+            spawnedHero.Init();
             randomSpawnTile.SetUnit(spawnedHero);
 
             heroLst.Add(spawnedHero);
@@ -57,18 +47,6 @@ public class UnitManager : MonoBehaviour {
 
     public void SpawnEnemies()
     {
-        /*var enemyCount = 3;
-
-        for (int i = 0; i < enemyCount; i++)
-        {
-            var randomPrefab = GetRandomUnit<BaseEnemy>(Faction.Enemy);
-            var spawnedEnemy = Instantiate(randomPrefab);
-            var randomSpawnTile = GridManager.Instance.GetEnemySpawnTile();
-
-            randomSpawnTile.SetUnit(spawnedEnemy);
-        }*/
-
-
         //new one
         var prefab = GetRandomUnit<BaseEnemy>(Faction.Enemy);
         var lst = GridManager.Instance.GetSpawnTiles(EnTileType.Def);
@@ -80,6 +58,7 @@ public class UnitManager : MonoBehaviour {
             var spawnedHero = Instantiate(prefab);
             var randomSpawnTile = lst[i];
 
+            spawnedHero.Init();
             randomSpawnTile.SetUnit(spawnedHero);
 
             enemyLst.Add(spawnedHero);
@@ -137,5 +116,23 @@ public class UnitManager : MonoBehaviour {
                 indicatorTile.Add(item.OccupiedTile);
             }
         }
+    }
+
+    //
+    public void RemoveUnit(BaseUnit baseUnit)
+    {
+        switch (baseUnit.Faction)
+        {
+            case Faction.Hero:
+                heroLst.Remove(baseUnit);
+                break;
+            case Faction.Enemy:
+                enemyLst.Remove(baseUnit);
+                break;
+            default:
+                break;
+        }
+        
+        Destroy(baseUnit.gameObject);
     }
 }

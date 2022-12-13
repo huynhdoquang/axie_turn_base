@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class BaseEnemy : BaseUnit
 {
-    // Start is called before the first frame update
-    void Start()
+    public void Init()
     {
-        
-    }
+        hp = 32;
+        curHp = 32;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        this.InitStatus();
     }
 }

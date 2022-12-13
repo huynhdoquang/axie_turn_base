@@ -1,8 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class BaseUnit : MonoBehaviour {
+
+    //ui
+    [SerializeField] private TextMeshPro txtMagicNumber;
+    [SerializeField] private TextMeshPro txtHP;
 
     //grid
     public string UnitName;
@@ -44,14 +49,33 @@ public class BaseUnit : MonoBehaviour {
         this.curCrd = enMapCrd;
     }
 
-    public void TakeDmg(BaseUnit attacker)
+    public void TakeDmg(int attackerMagicNum)
     {
-        var loseHp = GameManager.Instance.CaculatorDmg(attacker, this);
+        var loseHp = GameManager.Instance.CaculatorDmg(attackerMagicNum, this.magicNumber);
         curHp -= loseHp;
         if(curHp <= 0)
         {
             curHp = 0;
             //todo: set state to die
+            UnitManager.Instance.RemoveUnit(this);
         }
+
+        this.txtHP.text = $"{curHp}/{hp}";
+    }
+
+    //
+    public void InitStatus()
+    {
+        this.txtHP.text = $"{curHp}/{hp}";
+
+        //magic num
+        this.magicNumber = Random.Range(1, 4);
+        this.txtMagicNumber.text = $"{magicNumber}";
+    }
+
+    public void SetHp(int curHp)
+    {
+        this.curHp = curHp;
+        this.txtHP.text = $"{curHp}/{hp}";
     }
 }

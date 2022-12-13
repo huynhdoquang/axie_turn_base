@@ -52,15 +52,17 @@ public abstract class Tile : MonoBehaviour {
             } 
             else //click on enemy
             {
+                var selectedHero = UnitManager.Instance.SelectedHero;
                 //check to atk enemy if avaiable
-                if (UnitManager.Instance.SelectedHero != null) {
+                if (selectedHero != null) {
                     var enemy = (BaseEnemy)OccupiedUnit;
 
                     var atkAvaiable = UnitManager.Instance.CurrentTurnData.AtkUnitAvaiables;
                     if (atkAvaiable != null && atkAvaiable.Contains(enemy))
                     {
+                        var atkMagicNumber = selectedHero.magicNumber;
                         //do atk
-                        enemy.TakeDmg(UnitManager.Instance.SelectedHero);
+                        enemy.TakeDmg(atkMagicNumber);
                         UnitManager.Instance.SetSelectedHero(null);
                     }
                 }

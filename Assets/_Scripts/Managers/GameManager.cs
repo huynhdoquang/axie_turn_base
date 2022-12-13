@@ -58,9 +58,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public int CaculatorDmg(BaseUnit attacker, BaseUnit target)
+    public int CaculatorDmg(int attackerMagicNum, int targetMagicNum)
     {
-        var dmgNumber = (3 + attacker.magicNumber - target.magicNumber) % 3;
+        var dmgNumber = (3 + attackerMagicNum - targetMagicNum) % 3;
         switch (dmgNumber)
         {
             case 0:
