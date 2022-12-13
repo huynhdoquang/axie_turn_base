@@ -24,10 +24,11 @@ public class UnitManager : MonoBehaviour {
     }
 
     public void SpawnHeroes() {
+
+        heroLst = new List<BaseUnit>();
         //new one
         var prefab = GetRandomUnit<BaseHero>(Faction.Hero);
         var lst = GridManager.Instance.GetSpawnTiles(EnTileType.Atk);
-        var lst_iso = GridManager.Instance.GetSpawnTilesIso(EnTileType.Atk);
 
         Debug.Log("list here: " + lst.Count);
         for (int i = 0; i < lst.Count; i++)
@@ -47,10 +48,10 @@ public class UnitManager : MonoBehaviour {
 
     public void SpawnEnemies()
     {
+        enemyLst = new List<BaseUnit>();
         //new one
         var prefab = GetRandomUnit<BaseEnemy>(Faction.Enemy);
         var lst = GridManager.Instance.GetSpawnTiles(EnTileType.Def);
-        var lst_iso = GridManager.Instance.GetSpawnTilesIso(EnTileType.Def);
 
         for (int i = 0; i < lst.Count; i++)
         {
@@ -71,7 +72,7 @@ public class UnitManager : MonoBehaviour {
         return (T)_units.Where(u => u.Faction == faction).OrderBy(o => Random.value).First().UnitPrefab;
     }
 
-    private List<Tile> indicatorTile = new List<Tile>();
+    private List<TileContext> indicatorTile = new List<TileContext>();
     public CharTurnData CurrentTurnData;
     public void SetSelectedHero(BaseHero hero) {
 
@@ -87,7 +88,7 @@ public class UnitManager : MonoBehaviour {
         {
             item.ResetState();
         }
-        indicatorTile = new List<Tile>();
+        indicatorTile = new List<TileContext>();
 
         if (hero == null)
         {
@@ -112,8 +113,8 @@ public class UnitManager : MonoBehaviour {
         {
             foreach (var item in CurrentTurnData.AtkUnitAvaiables)
             {
-                item.OccupiedTile.ShowAtkAble();
-                indicatorTile.Add(item.OccupiedTile);
+                item.TileContext.ShowAtkAble();
+                indicatorTile.Add(item.TileContext);
             }
         }
     }
@@ -134,5 +135,28 @@ public class UnitManager : MonoBehaviour {
         }
         
         Destroy(baseUnit.gameObject);
+
+        //end game checker
+        if (heroLst.Count == 0)
+        {
+            if (enemyLst.Count == 0)
+            {
+                //draw
+                MenuManager.Instance.ShowPanelInfo("DRAW");
+            }
+            else
+            {
+                //lose
+                MenuManager.Instance.ShowPanelInfo("LOSE");
+            }
+        }
+        else
+        {
+            if (enemyLst.Count == 0)
+            {
+                //win
+                MenuManager.Instance.ShowPanelInfo("<< WIN >>>");
+            }
+        }
     }
 }

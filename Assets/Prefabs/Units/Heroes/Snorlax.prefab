@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1707012547160772909
 Transform:
   m_ObjectHideFlags: 0
@@ -523,7 +523,6 @@ MonoBehaviour:
   txtMagicNumber: {fileID: 2332419857561057162}
   txtHP: {fileID: 5040016265010875892}
   UnitName: Snorlax
-  OccupiedTile: {fileID: 0}
   Faction: 0
   magicNumber: 0
   hp: 0

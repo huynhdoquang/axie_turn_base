@@ -11,22 +11,41 @@ public class BaseUnit : MonoBehaviour {
 
     //grid
     public string UnitName;
-    public Tile OccupiedTile;
+    public TileContext TileContext;
     public Faction Faction;
-
-    private EnMapCrd curCrd;
 
     //attritube
     public int magicNumber;
     public int hp;
     public int curHp;
 
+    EnMapCrd curMapCrd;
+
+    public void UpdateTileContext(TileContext tileContext)
+    {
+        switch (curMapCrd)
+        {
+            case EnMapCrd.Base:
+                this.transform.position = tileContext.baseView.transform.position;
+                break;
+            case EnMapCrd.Iso:
+                this.transform.position = tileContext.isoView.transform.position;
+                break;
+            default:
+                break;
+        }
+
+        this.TileContext = tileContext;
+        this.TileContext.OccupiedUnit = this;
+    }
+
     public void SwicthCrd(EnMapCrd enMapCrd)
     {
+        /*//re-check pos
         var localX = 0f;
         var localY = 0f;
 
-        Vector2 offset = OccupiedTile.Offset;
+        Vector2 offset = TileContext.Offset;
        
         var x = offset.x;
         var y = offset.y;
@@ -45,8 +64,25 @@ public class BaseUnit : MonoBehaviour {
                 break;
         }
 
-        this.transform.position = new Vector3(localX, localY);
-        this.curCrd = enMapCrd;
+        this.transform.position = new Vector3(localX, localY);*/
+
+        //
+        curMapCrd = enMapCrd;
+        switch (enMapCrd)
+        {
+            case EnMapCrd.Base:
+                {
+                    this.transform.position = TileContext.baseView.transform.position;
+                    break;
+                }
+            case EnMapCrd.Iso:
+                {
+                    this.transform.position = TileContext.isoView.transform.position;
+                    break;
+                }
+            default:
+                break;
+        }
     }
 
     public void TakeDmg(int attackerMagicNum)
@@ -78,4 +114,5 @@ public class BaseUnit : MonoBehaviour {
         this.curHp = curHp;
         this.txtHP.text = $"{curHp}/{hp}";
     }
+
 }

@@ -73,6 +73,21 @@ public class GameManager : MonoBehaviour
                 return 0;
         }
     }
+
+    public void Restart()
+    {
+        //clear map
+        foreach (var item in UnitManager.Instance.heroLst)
+        {
+            Destroy(item.gameObject);
+        }
+        foreach (var item in UnitManager.Instance.enemyLst)
+        {
+            Destroy(item.gameObject);
+        }
+        //
+        ChangeState(GameState.SpawnHeroes);
+    }
 }
 
 public enum GameState
