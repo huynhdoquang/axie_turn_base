@@ -18,7 +18,10 @@ MonoBehaviour:
   _spriteIso: {fileID: 0}
   _highlight: {fileID: 8145960743030912638}
   _isWalkable: 1
+  turnMoveAble: {fileID: 7151148790706338404}
+  turnAtkAble: {fileID: 4888008227299679804}
   OccupiedUnit: {fileID: 0}
+  Offset: {x: 0, y: 0}
   _baseColor: {r: 0.4392157, g: 0.7411765, b: 0.36862746, a: 1}
   _offsetColor: {r: 0.4, g: 0.6901961, b: 0.33333334, a: 1}
 --- !u!1001 &3275597865028579855
@@ -37,6 +40,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Grass Tile
+      objectReference: {fileID: 0}
+    - target: {fileID: 3822521982972711366, guid: 389a40555769ebb4b9a76dbb6f2248b5,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.09169958
+      objectReference: {fileID: 0}
+    - target: {fileID: 3822521982972711366, guid: 389a40555769ebb4b9a76dbb6f2248b5,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.09169958
+      objectReference: {fileID: 0}
+    - target: {fileID: 3822521982972711366, guid: 389a40555769ebb4b9a76dbb6f2248b5,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.09169958
       objectReference: {fileID: 0}
     - target: {fileID: 6861981929107700963, guid: 389a40555769ebb4b9a76dbb6f2248b5,
         type: 3}
@@ -110,6 +128,18 @@ SpriteRenderer:
 --- !u!1 &8145960743030912638 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6663364570048627825, guid: 389a40555769ebb4b9a76dbb6f2248b5,
+    type: 3}
+  m_PrefabInstance: {fileID: 3275597865028579855}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4888008227299679804 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7971639015615769651, guid: 389a40555769ebb4b9a76dbb6f2248b5,
+    type: 3}
+  m_PrefabInstance: {fileID: 3275597865028579855}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7151148790706338404 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5640961979608565867, guid: 389a40555769ebb4b9a76dbb6f2248b5,
     type: 3}
   m_PrefabInstance: {fileID: 3275597865028579855}
   m_PrefabAsset: {fileID: 0}

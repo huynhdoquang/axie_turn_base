@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class BaseHero : BaseUnit
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private GameObject indicator;
 
-    // Update is called once per frame
-    void Update()
+    public void SetSelected(bool isSelected)
     {
-        
+        indicator.SetActive(isSelected);
     }
 }

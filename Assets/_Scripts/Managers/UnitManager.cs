@@ -92,9 +92,50 @@ public class UnitManager : MonoBehaviour {
         return (T)_units.Where(u => u.Faction == faction).OrderBy(o => Random.value).First().UnitPrefab;
     }
 
+    private List<Tile> indicatorTile = new List<Tile>();
+    public CharTurnData CurrentTurnData;
     public void SetSelectedHero(BaseHero hero) {
-        SelectedHero = hero;
-        MenuManager.Instance.ShowSelectedHero(hero);
-    }
 
+        if(SelectedHero != null) SelectedHero.SetSelected(false);
+        SelectedHero = hero;
+
+        //ingame hud
+        MenuManager.Instance.ShowSelectedHero(hero);
+
+        //show character indicator.
+        //reset indicator
+        foreach (var item in indicatorTile)
+        {
+            item.ResetState();
+        }
+        indicatorTile = new List<Tile>();
+
+        if (hero == null)
+        {
+            return;
+        }
+
+        //
+        hero.SetSelected(true);
+
+        this.CurrentTurnData = GridManager.Instance.CheckTurnData(hero);
+        //safe check 
+        if (CurrentTurnData.MoveTileAvaiables != null)
+        {
+            foreach (var item in CurrentTurnData.MoveTileAvaiables)
+            {
+                item.ShowMoveAble();
+                indicatorTile.Add(item);
+            }
+        }
+        //safe check 
+        if (CurrentTurnData.AtkUnitAvaiables != null)
+        {
+            foreach (var item in CurrentTurnData.AtkUnitAvaiables)
+            {
+                item.OccupiedTile.ShowAtkAble();
+                indicatorTile.Add(item.OccupiedTile);
+            }
+        }
+    }
 }

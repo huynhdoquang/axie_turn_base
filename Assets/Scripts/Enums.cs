@@ -2,6 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public class MovementInfo
+{
+    public List<Vector2> ListMoveableOffset;
+}
+
 public enum EnTileType
 {
     Base = 0,

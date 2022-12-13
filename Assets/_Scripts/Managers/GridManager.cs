@@ -5,6 +5,20 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+public enum EnMoveAvaiable
+{
+    Left,
+    Right,
+    Top,
+    Bot
+}
+
+public class CharTurnData
+{
+    public List<BaseUnit> AtkUnitAvaiables;
+    public List<Tile> MoveTileAvaiables;
+}
+
 public class GridManager : MonoBehaviour {
     public static GridManager Instance;
     [SerializeField] private int _width, _height;
@@ -196,4 +210,194 @@ public class GridManager : MonoBehaviour {
         return tiles;
     }
 
+    //Utils
+    private bool IsMoveAble(BaseUnit baseUnit)
+    {
+        var offset = baseUnit.OccupiedTile.Offset;
+
+        var faction = baseUnit.Faction;
+
+        var lstCheck = new List<Vector2>()
+                                    { new Vector2(offset.x + 1, offset.y),
+                                    new Vector2(offset.x - 1, offset.y),
+                                    new Vector2(offset.x, offset.y + 1),
+                                    new Vector2(offset.x, offset.y - 1)};
+
+        if (faction == Faction.Hero)
+        {
+            foreach (var item in UnitManager.Instance.heroLst)
+            {
+                var of = item.OccupiedTile.Offset;
+                if (lstCheck.Contains(of))
+                {
+                    return true;
+                }
+            }
+        }
+
+        if (faction == Faction.Enemy)
+        {
+            foreach (var item in UnitManager.Instance.enemyLst)
+            {
+                var of = item.OccupiedTile.Offset;
+                if (lstCheck.Contains(of))
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private List<Tile> CheckAvaiableMove(BaseUnit baseUnit)
+    {
+        var isMoveAble = IsMoveAble(baseUnit);
+        if (isMoveAble)
+        {
+            var lst_moveAble = new List<EnMoveAvaiable>();
+
+            //find closet enemy
+            var faction = baseUnit.Faction;
+
+            var dist = 0f;
+            float closetDist = _width + _height;
+            var lst = new List<Vector2>();
+            if (faction == Faction.Hero)
+            {
+                foreach (var item in UnitManager.Instance.enemyLst)
+                {
+                    dist = (item.OccupiedTile.Offset - baseUnit.OccupiedTile.Offset).magnitude;
+
+                    if (dist <= closetDist)
+                    {
+                        closetDist = dist;
+                        lst.Add(item.OccupiedTile.Offset);
+                    }
+                }
+
+                foreach (var item in lst)
+                {
+                    var subtract = item - baseUnit.OccupiedTile.Offset;
+
+                    if (subtract.x > 0)
+                    {
+                        //add left
+                        if (!lst_moveAble.Contains(EnMoveAvaiable.Right)) lst_moveAble.Add(EnMoveAvaiable.Right);
+                    }
+                    if (subtract.x < 0)
+                    {
+                        //add right
+                        if (!lst_moveAble.Contains(EnMoveAvaiable.Left)) lst_moveAble.Add(EnMoveAvaiable.Left);
+                    }
+                    if (subtract.y > 0)
+                    {
+                        //add top
+                        if (!lst_moveAble.Contains(EnMoveAvaiable.Top)) lst_moveAble.Add(EnMoveAvaiable.Top);
+                    }
+                    if (subtract.y < 0)
+                    {
+                        //add bot
+                        if (!lst_moveAble.Contains(EnMoveAvaiable.Bot)) lst_moveAble.Add(EnMoveAvaiable.Bot);
+                    }
+                }
+
+                var returnLst = new List<Tile>();
+                foreach (var item in lst_moveAble)
+                {
+                    switch (item)
+                    {
+                        case EnMoveAvaiable.Left:
+                            {
+                                var tile = GetTileAtPosition(baseUnit.OccupiedTile.Offset + new Vector2(-1, 0));
+                                if (tile.OccupiedUnit == null)
+                                    returnLst.Add(tile);
+                                break;
+                            }
+                        case EnMoveAvaiable.Right:
+                            {
+                                var tile = GetTileAtPosition(baseUnit.OccupiedTile.Offset + new Vector2(1, 0));
+                                if (tile.OccupiedUnit == null)
+                                    returnLst.Add(tile);
+                                break;
+                            }
+                        case EnMoveAvaiable.Top:
+                            {
+                                var tile = GetTileAtPosition(baseUnit.OccupiedTile.Offset + new Vector2(0, 1));
+                                if (tile.OccupiedUnit == null)
+                                    returnLst.Add(tile);
+                                break;
+                            }
+                        case EnMoveAvaiable.Bot:
+                            {
+                                var tile = GetTileAtPosition(baseUnit.OccupiedTile.Offset + new Vector2(0, -1));
+                                if (tile.OccupiedUnit == null)
+                                    returnLst.Add(tile);
+                                break;
+                            }
+                        default:
+                            break;
+                    }
+                }
+                return returnLst;
+            }
+            else
+            {
+                //enemy can not move
+                return null;
+            }
+        }
+        else
+        {
+            //null
+            return null;
+        }
+    }
+
+    public CharTurnData CheckTurnData(BaseUnit baseUnit)
+    {
+        var charTurnData = new CharTurnData();
+        charTurnData.MoveTileAvaiables = CheckAvaiableMove(baseUnit);
+
+        //
+        charTurnData.AtkUnitAvaiables = new List<BaseUnit>();
+        var offset = baseUnit.OccupiedTile.Offset;
+        var faction = baseUnit.Faction;
+
+        var lstCheck = new List<Vector2>()
+                                    { new Vector2(offset.x + 1, offset.y),
+                                    new Vector2(offset.x - 1, offset.y),
+                                    new Vector2(offset.x, offset.y + 1),
+                                    new Vector2(offset.x, offset.y - 1)};
+
+        if (faction == Faction.Hero)
+        {
+            foreach (var item in UnitManager.Instance.enemyLst)
+            {
+                var of = item.OccupiedTile.Offset;
+                if (lstCheck.Contains(of))
+                {
+                    charTurnData.AtkUnitAvaiables.Add(item);
+                }
+            }
+        }
+
+        if (faction == Faction.Enemy)
+        {
+            foreach (var item in UnitManager.Instance.heroLst)
+            {
+                var of = item.OccupiedTile.Offset;
+                if (lstCheck.Contains(of))
+                {
+                    charTurnData.AtkUnitAvaiables.Add(item);
+                }
+            }
+        }
+
+        return charTurnData;
+    }
+    public void MoveUnit()
+    {
+
+    }
 }

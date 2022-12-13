@@ -3,11 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BaseUnit : MonoBehaviour {
+
+    //grid
     public string UnitName;
     public Tile OccupiedTile;
     public Faction Faction;
 
     private EnMapCrd curCrd;
+
+    //attritube
+    public int magicNumber;
+    public int hp;
+    public int curHp;
 
     public void SwicthCrd(EnMapCrd enMapCrd)
     {
@@ -35,5 +42,16 @@ public class BaseUnit : MonoBehaviour {
 
         this.transform.position = new Vector3(localX, localY);
         this.curCrd = enMapCrd;
+    }
+
+    public void TakeDmg(BaseUnit attacker)
+    {
+        var loseHp = GameManager.Instance.CaculatorDmg(attacker, this);
+        curHp -= loseHp;
+        if(curHp <= 0)
+        {
+            curHp = 0;
+            //todo: set state to die
+        }
     }
 }

@@ -57,6 +57,22 @@ public class GameManager : MonoBehaviour
             GridManager.Instance.SwitchCrd(enMapCod);
         }
     }
+
+    public int CaculatorDmg(BaseUnit attacker, BaseUnit target)
+    {
+        var dmgNumber = (3 + attacker.magicNumber - target.magicNumber) % 3;
+        switch (dmgNumber)
+        {
+            case 0:
+                return 4;
+            case 1:
+                return 5;
+            case 2:
+                return 3;
+            default:
+                return 0;
+        }
+    }
 }
 
 public enum GameState

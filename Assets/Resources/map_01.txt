@@ -1,10 +1,10 @@
 Base	Base	Base	Base	Base	Base	Base	Base	Base	Base	Base	Base
 Base	Base	Base	Base	Base	Base	Base	Base	Base	Base	Base	Base
 Base	Base	Base	Base	Base	Base	Base	Base	Base	Base	Base	Base
-Base	Base	Base	Base	Base	Base	Base	Base	Base	Base	Base	Base
-Base	Base	Base	Base	Base	Base	Base	Base	Base	Base	Base	Base
-Base	Base	Base	Base	Base	Base	Base	Base	Base	Base	Base	Base
-Base	Base	Base	Base	Base	Base	Base	Base	Base	Base	Base	Base
+Base	Base	Base	Def	Def	Base	Base	Base	Base	Base	Base	Base
+Base	Atk	Base	Def	Def	Base	Base	Base	Base	Base	Base	Base
+Base	Atk	Base	Base	Base	Base	Base	Base	Base	Base	Base	Base
+Base	Atk	Base	Base	Base	Base	Base	Base	Base	Base	Base	Base
 Base	Atk	Base	Base	Base	Base	Base	Base	Base	Base	Base	Base
 Base	Base	Base	Base	Base	Base	Base	Base	Base	Base	Base	Base
 Base	Base	Base	Base	Base	Base	Base	Base	Base	Base	Base	Base
