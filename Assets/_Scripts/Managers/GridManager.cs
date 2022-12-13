@@ -96,7 +96,7 @@ public class GridManager : MonoBehaviour {
 
         _cam.transform.position = new Vector3((float)_width / 2 - 0.5f, -(float)_height / 2 - 0.5f + 1, -10);
 
-        GameManager.Instance.ChangeState(GameState.SpawnHeroes);
+        GameManager.Instance.ChangeState(GameState.FetchMixerInfo);
 
         CurMapCrd = EnMapCrd.Base;
     }

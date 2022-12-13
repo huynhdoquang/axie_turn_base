@@ -30,14 +30,14 @@ public class UnitManager : MonoBehaviour {
         var prefab = GetRandomUnit<BaseHero>(Faction.Hero);
         var lst = GridManager.Instance.GetSpawnTiles(EnTileType.Atk);
 
+        var skeletonData = GameManager.Instance.Mixer.AllyResult;
         Debug.Log("list here: " + lst.Count);
         for (int i = 0; i < lst.Count; i++)
         {
-           
             var spawnedHero = Instantiate(prefab);
-            var randomSpawnTile = lst[i];
-
             spawnedHero.Init();
+            var randomSpawnTile = lst[i];
+            spawnedHero.UpdateSkeleton(skeletonData);
             randomSpawnTile.SetUnit(spawnedHero);
 
             heroLst.Add(spawnedHero);
@@ -53,13 +53,14 @@ public class UnitManager : MonoBehaviour {
         var prefab = GetRandomUnit<BaseEnemy>(Faction.Enemy);
         var lst = GridManager.Instance.GetSpawnTiles(EnTileType.Def);
 
+        var skeletonData = GameManager.Instance.Mixer.EnemyResult;
         for (int i = 0; i < lst.Count; i++)
         {
-
             var spawnedHero = Instantiate(prefab);
             var randomSpawnTile = lst[i];
 
             spawnedHero.Init();
+            spawnedHero.UpdateSkeleton(skeletonData);
             randomSpawnTile.SetUnit(spawnedHero);
 
             enemyLst.Add(spawnedHero);

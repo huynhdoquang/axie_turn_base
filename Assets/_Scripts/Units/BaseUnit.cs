@@ -1,3 +1,5 @@
+using AxieMixer.Unity;
+using Spine.Unity;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,6 +11,8 @@ public class BaseUnit : MonoBehaviour {
     [SerializeField] private TextMeshPro txtMagicNumber;
     [SerializeField] private TextMeshPro txtHP;
     [SerializeField] private TextMeshPro txtPredictDmg;
+
+    [SerializeField] private SkeletonAnimation runtimeSkeletonAnimation;
 
     //grid
     public string UnitName;
@@ -42,31 +46,6 @@ public class BaseUnit : MonoBehaviour {
 
     public void SwicthCrd(EnMapCrd enMapCrd)
     {
-        /*//re-check pos
-        var localX = 0f;
-        var localY = 0f;
-
-        Vector2 offset = TileContext.Offset;
-       
-        var x = offset.x;
-        var y = offset.y;
-
-        switch (enMapCrd)
-        {
-            case EnMapCrd.Base:
-                localX = x;
-                localY = -y;
-                break;
-            case EnMapCrd.Iso:
-                localX = (x + y) * 0.5f * 2;
-                localY = (x - y) * 0.25f * 2;
-                break;
-            default:
-                break;
-        }
-
-        this.transform.position = new Vector3(localX, localY);*/
-
         //
         curMapCrd = enMapCrd;
         switch (enMapCrd)
@@ -117,5 +96,29 @@ public class BaseUnit : MonoBehaviour {
         this.txtMagicNumber.text = $"{magicNumber}";
 
         ShowCombatPredictDmg(-1);
+    }
+
+    //skeleton
+    public void UpdateSkeleton(Axie2dBuilderResult builderResult)
+    {
+        this.runtimeSkeletonAnimation.skeletonDataAsset = builderResult.skeletonDataAsset;
+
+        //runtimeSkeletonAnimation.gameObject.layer = LayerMask.NameToLayer("Player");
+        //runtimeSkeletonAnimation.transform.SetParent(go.transform, false);
+        runtimeSkeletonAnimation.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+
+        runtimeSkeletonAnimation.GetComponent<MeshRenderer>().sortingOrder = 2;
+
+        runtimeSkeletonAnimation.gameObject.AddComponent<AutoBlendAnimController>();
+        runtimeSkeletonAnimation.state.SetAnimation(0, "action/idle/normal", true);
+
+        if (builderResult.adultCombo.ContainsKey("body") &&
+            builderResult.adultCombo["body"].Contains("mystic") &&
+            builderResult.adultCombo.TryGetValue("body-class", out var bodyClass) &&
+            builderResult.adultCombo.TryGetValue("body-id", out var bodyId))
+        {
+            runtimeSkeletonAnimation.gameObject.AddComponent<MysticIdController>().Init(bodyClass, bodyId);
+        }
+        runtimeSkeletonAnimation.skeleton.FindSlot("shadow").Attachment = null;
     }
 }

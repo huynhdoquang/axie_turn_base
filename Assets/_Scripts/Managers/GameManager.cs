@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public GameState GameState;
 
+    public MixerLoader Mixer;
+
     void Awake()
     {
         Instance = this;
@@ -18,7 +20,7 @@ public class GameManager : MonoBehaviour
         ChangeState(GameState.GenerateGrid);
     }
 
-    public void ChangeState(GameState newState)
+    public async void ChangeState(GameState newState)
     {
         GameState = newState;
         switch (newState)
@@ -26,6 +28,12 @@ public class GameManager : MonoBehaviour
             case GameState.GenerateGrid:
                 GridManager.Instance.GenerateGrid();
                 break;
+            case GameState.FetchMixerInfo:
+                {
+                    await Mixer.Fetch();
+                    ChangeState(GameState.SpawnHeroes);
+                    break;
+                }
             case GameState.SpawnHeroes:
                 UnitManager.Instance.SpawnHeroes();
                 break;
@@ -130,9 +138,10 @@ public class GameManager : MonoBehaviour
 public enum GameState
 {
     GenerateGrid = 0,
-    SpawnHeroes = 1,
-    SpawnEnemies = 2,
-    InitHud = 3,
-    HeroesTurn = 4,
-    EnemiesTurn = 5
+    FetchMixerInfo = 1,
+    SpawnHeroes = 2,
+    SpawnEnemies = 3,
+    InitHud = 4,
+    HeroesTurn = 5,
+    EnemiesTurn = 6
 }
