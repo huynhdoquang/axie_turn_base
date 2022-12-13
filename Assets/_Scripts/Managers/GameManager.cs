@@ -26,10 +26,12 @@ public class GameManager : MonoBehaviour
         switch (newState)
         {
             case GameState.GenerateGrid:
+                Debug.Log("GenerateGrid.");
                 GridManager.Instance.GenerateGrid();
                 break;
             case GameState.FetchMixerInfo:
                 {
+                    Debug.Log("FetchMixerInfo.");
                     await Mixer.Fetch();
                     ChangeState(GameState.SpawnHeroes);
                     break;

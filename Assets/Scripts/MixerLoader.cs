@@ -37,6 +37,9 @@ public class MixerLoader : MonoBehaviour
 
         AllyResult = taskResult[0];
         EnemyResult = taskResult[1];
+
+        Debug.Log("AllyResult: " + (AllyResult != null));
+        Debug.Log("EnemyResult: " + (AllyResult != null));
     }
 
     private async UniTask<Axie2dBuilderResult> GetAxiesGenes(string axieId)
