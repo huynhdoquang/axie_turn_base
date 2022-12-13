@@ -35,6 +35,8 @@ public class GridManager : MonoBehaviour {
 
     public Dictionary<Vector2, TileContext> TileContexts;
 
+    public EnMapCrd CurMapCrd;
+
     /// <summary>
     /// iso 100 x 50
     /// </summary>
@@ -95,10 +97,14 @@ public class GridManager : MonoBehaviour {
         _cam.transform.position = new Vector3((float)_width / 2 - 0.5f, -(float)_height / 2 - 0.5f + 1, -10);
 
         GameManager.Instance.ChangeState(GameState.SpawnHeroes);
+
+        CurMapCrd = EnMapCrd.Base;
     }
 
     public void SwitchCrd(EnMapCrd enMapCrd)
     {
+        CurMapCrd = enMapCrd;
+
         baseContainer.gameObject.SetActive(enMapCrd == EnMapCrd.Base);
         isoContainer.gameObject.SetActive(enMapCrd == EnMapCrd.Iso);
 
