@@ -65,8 +65,9 @@ public class UnitManager : MonoBehaviour {
             enemyLst.Add(spawnedHero);
         }
 
-        GameManager.Instance.ChangeState(GameState.HeroesTurn);
+        GameManager.Instance.ChangeState(GameState.InitHud);
     }
+
 
     private T GetRandomUnit<T>(Faction faction) where T : BaseUnit {
         return (T)_units.Where(u => u.Faction == faction).OrderBy(o => Random.value).First().UnitPrefab;
@@ -95,6 +96,11 @@ public class UnitManager : MonoBehaviour {
         {
             if (isEndAction)
             {
+                GameManager.Instance.RefreshIngameHud();
+            }
+
+            if (isEndAction && this.heroLst.Count > 0 && this.enemyLst.Count > 0)
+            {
                 //check turn
                 foreach (var item in this.heroLst)
                 {
@@ -112,6 +118,8 @@ public class UnitManager : MonoBehaviour {
             return;
         }
 
+
+        
         //
         hero.SetSelected(true);
 
@@ -131,6 +139,7 @@ public class UnitManager : MonoBehaviour {
             foreach (var item in CurrentTurnData.AtkUnitAvaiables)
             {
                 item.TileContext.ShowAtkAble();
+                item.ShowCombatPredictDmg(SelectedHero.magicNumber);
                 indicatorTile.Add(item.TileContext);
             }
         }

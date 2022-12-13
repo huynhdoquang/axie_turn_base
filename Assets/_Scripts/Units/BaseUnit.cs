@@ -8,6 +8,7 @@ public class BaseUnit : MonoBehaviour {
     //ui
     [SerializeField] private TextMeshPro txtMagicNumber;
     [SerializeField] private TextMeshPro txtHP;
+    [SerializeField] private TextMeshPro txtPredictDmg;
 
     //grid
     public string UnitName;
@@ -99,6 +100,13 @@ public class BaseUnit : MonoBehaviour {
         this.txtHP.text = $"{curHp}/{hp}";
     }
 
+    public void ShowCombatPredictDmg(int attackerMagicNum)
+    {
+        this.txtPredictDmg.gameObject.SetActive(attackerMagicNum != -1);
+        var loseHp = GameManager.Instance.CaculatorDmg(attackerMagicNum, this.magicNumber);
+        this.txtPredictDmg.text = $"-{loseHp}";
+    }
+
     //
     public void InitStatus()
     {
@@ -107,12 +115,7 @@ public class BaseUnit : MonoBehaviour {
         //magic num
         this.magicNumber = Random.Range(1, 4);
         this.txtMagicNumber.text = $"{magicNumber}";
-    }
 
-    public void SetHp(int curHp)
-    {
-        this.curHp = curHp;
-        this.txtHP.text = $"{curHp}/{hp}";
+        ShowCombatPredictDmg(-1);
     }
-
 }

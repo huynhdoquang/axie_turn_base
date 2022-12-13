@@ -27,9 +27,6 @@ public class CameraControl : MonoBehaviour
     [SerializeField] private Camera cam;
     [SerializeField] private Slider slider;
 
-    [SerializeField] private Button btnReset;
-    [SerializeField] private Button btnDrag;
-
     private float maxSizeBase = 6.2f;
     private float minSizeBase = 3f;
 

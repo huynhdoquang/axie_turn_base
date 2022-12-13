@@ -57,6 +57,11 @@ public class TileContext
         this.isAtkAble = false;
         baseView.ResetState();
         isoView.ResetState();
+
+        if(OccupiedUnit != null)
+        {
+            OccupiedUnit.ShowCombatPredictDmg(-1);
+        }
     }
 
 }

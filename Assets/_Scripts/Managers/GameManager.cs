@@ -32,6 +32,13 @@ public class GameManager : MonoBehaviour
             case GameState.SpawnEnemies:
                 UnitManager.Instance.SpawnEnemies();
                 break;
+            case GameState.InitHud:
+                {
+                    RefreshIngameHud(isInit: true);
+                    ChangeState(GameState.HeroesTurn);
+                    break;
+                }
+                
             case GameState.HeroesTurn:
                 break;
             case GameState.EnemiesTurn:
@@ -39,6 +46,29 @@ public class GameManager : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
         }
+    }
+
+    public void RefreshIngameHud(bool isInit = false)
+    {
+        var allies = UnitManager.Instance.heroLst;
+        var enemies = UnitManager.Instance.enemyLst;
+
+        var allyCp = 0;
+        foreach (var item in allies)
+        {
+            allyCp += item.curHp;
+        }
+
+        var eneCp = 0;
+        foreach (var item in enemies)
+        {
+            eneCp += item.curHp;
+        }
+
+        if(isInit)
+            MenuManager.Instance.InGameHudController.Init(allyCp, eneCp);
+        else
+            MenuManager.Instance.InGameHudController.SetData(allyCp, eneCp);
     }
 
     EnMapCrd enMapCod = EnMapCrd.Base;
@@ -97,6 +127,7 @@ public enum GameState
     GenerateGrid = 0,
     SpawnHeroes = 1,
     SpawnEnemies = 2,
-    HeroesTurn = 3,
-    EnemiesTurn = 4
+    InitHud = 3,
+    HeroesTurn = 4,
+    EnemiesTurn = 5
 }

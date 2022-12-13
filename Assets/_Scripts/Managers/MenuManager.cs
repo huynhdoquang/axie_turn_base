@@ -10,6 +10,7 @@ public class MenuManager : MonoBehaviour {
     [SerializeField] private GameObject _selectedHeroObject,_tileObject,_tileUnitObject;
 
     [SerializeField] private GameObject panelMsg;
+    [SerializeField] public InGameHudController InGameHudController;
 
     void Awake() {
         Instance = this;
